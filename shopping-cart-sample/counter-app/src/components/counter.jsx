@@ -9,11 +9,13 @@ class Counter extends Component {
         fontWeight: "bold",
     };
 
-    constructor() {
-        super();
-        this.handleIncrement = this.handleIncrement.bind(this);
-        this.handleDecrement = this.handleDecrement.bind(this);
-    }
+    // Use this constructor style to handle the issue with `this` is undefined
+    // if the arrow functions don't work
+    // constructor() {
+    //     super();
+    //     this.handleIncrement = this.handleIncrement.bind(this);
+    //     this.handleDecrement = this.handleDecrement.bind(this);
+    // }
 
     render() {
         return (
@@ -21,8 +23,12 @@ class Counter extends Component {
                 <span style={this.styles} className={this.getBadgeClasses()}>
                     {this.formatCount()}
                 </span>
+                {/* // Use arrow function as parameter so we can call the function
+                // If we don't use arrow function then we are calling the
+                function directly // Which is invalid since React needs a
+                function reference as the onClick */}
                 <button
-                    onClick={this.handleIncrement}
+                    onClick={() => this.handleIncrement(product)}
                     style={{ fontSize: 30 }}
                     className="btn btn-secondary btn-sm m-2">
                     Increment
@@ -38,17 +44,17 @@ class Counter extends Component {
         );
     }
 
-    handleIncrement() {
+    handleIncrement = () => {
         this.setState({
             count: this.state.count + 1,
         });
-    }
+    };
 
-    handleDecrement() {
+    handleDecrement = () => {
         this.setState({
             count: this.state.count == 0 ? 0 : this.state.count - 1,
         });
-    }
+    };
 
     renderTags() {
         if (this.state.tags.length == 0) {

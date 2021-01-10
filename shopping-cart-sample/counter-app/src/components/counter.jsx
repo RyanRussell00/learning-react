@@ -28,7 +28,7 @@ class Counter extends Component {
                 function directly // Which is invalid since React needs a
                 function reference as the onClick */}
                 <button
-                    onClick={() => this.handleIncrement(product)}
+                    onClick={() => this.handleIncrement()}
                     style={{ fontSize: 30 }}
                     className="btn btn-secondary btn-sm m-2">
                     Increment

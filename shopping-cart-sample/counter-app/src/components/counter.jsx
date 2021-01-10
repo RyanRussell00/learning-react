@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class Counter extends Component {
     state = {
-        count: 0,
+        count: this.props.value,
         tags: ["tag1", "tag2", "tag3"],
     };
     styles = {
@@ -20,6 +20,7 @@ class Counter extends Component {
     render() {
         return (
             <div>
+                {/* Used to render children {this.props.children} */}
                 <span style={this.styles} className={this.getBadgeClasses()}>
                     {this.formatCount()}
                 </span>
@@ -28,7 +29,7 @@ class Counter extends Component {
                 function directly // Which is invalid since React needs a
                 function reference as the onClick */}
                 <button
-                    onClick={() => this.handleIncrement()}
+                    onClick={this.handleIncrement}
                     style={{ fontSize: 30 }}
                     className="btn btn-secondary btn-sm m-2">
                     Increment
